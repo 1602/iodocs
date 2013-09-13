@@ -732,8 +732,13 @@ function processRequest(req, res, next) {
                         console.log('key: ' + key);
                     };
 
+                    var headers = {};
                     if (apiConfig.oauth2.authorizationHeader && (apiConfig.oauth2.authorizationHeader == 'Y')) {
-                        var headers = {Authorization : "Bearer " + access_token};
+                        headers['Authorization'] = "Bearer " + access_token;
+                    }
+
+                    if (httpMethod == 'POST' && requestBody) {
+                        headers['Content-Type'] = 'application/x-www-form-urlencoded';
                     }
 
                     oa._request(httpMethod, privateReqURL, headers, requestBody, access_token, function (error, data, response) {
