@@ -732,7 +732,7 @@ function processRequest(req, res, next) {
                         console.log('key: ' + key);
                     };
 
-                    var headers = {};
+                    headers = options.headers || {};
                     if (apiConfig.oauth2.authorizationHeader && (apiConfig.oauth2.authorizationHeader == 'Y')) {
                         headers['Authorization'] = "Bearer " + access_token;
                     }
